@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/department-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/department-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/employee-react-app/employee-react-app.iml" filepath="$PROJECT_DIR$/employee-react-app/employee-react-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/employee-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/employee-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/organisation-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/organisation-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/organisation-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/organisation-service.test.iml" />
