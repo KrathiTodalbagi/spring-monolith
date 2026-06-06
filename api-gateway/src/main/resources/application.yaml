@@ -1,0 +1,39 @@
+server:
+  port: 9191
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+      server:
+        webmvc:
+          routes:
+            - id: 'EMPLOYEE-SERVICE'
+              uri: 'lb://EMPLOYEE-SERVICE'
+              predicates:
+                - Path=/api/employees/**
+            - id: 'DEPARTMENT-SERVICE'
+              uri: 'lb://DEPARTMENT-SERVICE'
+              predicates:
+                - Path=/api/departments/**
+            - id: 'ORGANISATION-SERVICE'
+              uri: 'lb://ORGANISATION-SERVICE'
+              predicates:
+                - Path=/api/organisations/**
+
+eureka:
+  instance:
+    client:
+      serverUrl:
+        defaultZone: 'http://localhost:8761/eureka/'

@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: department-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        missing-queues-fatal: false
+  cloud:
+    bus:
+      enabled: true
+      destination: springCloudBus
+    stream:
+      bindings:
+        springCloudBusInput:
+          group: ${spring.application.name}
+  datasource:
+#    url: 'jdbc:postgresql://localhost:5432/department_db'
+#    username: 'postgres'
+    password: '0211'
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: 'org.hibernate.dialect.PostgreSQLDialect'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+#eureka:
+#  instance:
+#    client:
+#      serverUrl:
+#        defaultZone: 'http://localhost:8761/eureka/'

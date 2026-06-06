@@ -1,0 +1,64 @@
+#server:  Taking the commented configs from Config server
+#  port: 8081
+spring:
+  application:
+    name: employee-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        missing-queues-fatal: false
+  cloud:
+    open-feign:
+      circuitbreaker:
+        enabled: true
+    bus:
+      enabled: true
+      destination: springCloudBus
+    stream:
+      bindings:
+        springCloudBusInput:
+          group: ${spring.application.name}
+  datasource:
+#    url: 'jdbc:postgresql://localhost:5432/employee_db'
+#    username: 'postgres'
+    password: '0211'
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: 'org.hibernate.dialect.PostgreSQLDialect'
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true # Actuator endpoint for circuit breaker
+
+# Circuit breaker configs
+resilience4j:
+  circuitbreaker:
+    instances:
+      department-detail:
+        register-health-indicator: true
+        failure-rate-threshold: 50
+        minimum-number-of-calls: 5
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 5s
+        permitted-number-of-calls-in-half-open-state: 3
+        sliding-window-size: 10
+        sliding-window-type: COUNT_BASED
+#eureka:
+#  instance:
+#    client:
+#      serverUrl:
+#        defaultZone: 'http://localhost:8761/eureka/'
+
+
